@@ -7,6 +7,11 @@ using System.IO;
 
 namespace _04_ConsoleGame_SimpleMap
 {
+    //剩余问题：
+    //1.棋子在移动到边界时会遇到index out of range异常
+    //2.调整地图边界
+    //3.棋子颜色
+    //4.敌人AI制作
     public class Player
     {
         public int x;
@@ -40,7 +45,41 @@ namespace _04_ConsoleGame_SimpleMap
         static Player p = new Player();
 
         static char[,] buffer = new char[height+offset_y+5, width+offset_x+5];
-        
+        //static char[,] MapArray = new char[50, 50];
+        static char[,] MapArray = new char[10, 43];
+
+        static void ReadBuffer()
+        {
+            StreamReader reader = new StreamReader("..\\..\\..\\Level1.txt");
+            int count = 0;
+            while (count<10)//count代表行数，最多10行
+            {
+                string s = reader.ReadLine();
+
+                char[] line1 = s.ToCharArray();
+
+                for(int i = 0; i < MapArray.GetLength(1); i++)
+                {
+                    MapArray[count, i] = line1[i];
+                }
+                count++;
+            }
+            reader.Close();
+            //string[] s_series = reader.
+        }
+        static void DrawBuffer()
+        {
+            Console.Clear();
+            for (int i = 0; i < MapArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < MapArray.GetLength(1); j++)
+                {
+                    Console.Write(MapArray[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
+
         static void ClearBuffer()
         {
             for(int i = 0; i < buffer.GetLength(0); i++)
@@ -76,12 +115,15 @@ namespace _04_ConsoleGame_SimpleMap
                 buffer[i + offset_y, offset_x + width] = '#';
             }
         }
-
+        static void DrawPlayerNew()
+        {
+            MapArray[p.y,p.x] = '@';
+        }
         static void DrawPlayer()
         {
             buffer[p.y + offset_y, p.x + offset_x] = '@';
         }
-
+        static int[] Direction = new int[] { 0, 1, 2, 3 };//0 < 1 > 2 V 3 A
         static void DrawPoints()
         {
             for(int i = 0; i < points.Count; i++)
@@ -120,35 +162,37 @@ namespace _04_ConsoleGame_SimpleMap
             //Console.ForegroundColor = color;
             Console.WriteLine("score:{0}", p.score);
         }
-        static void Map_BinaryRead()
-        {
-            StreamReader reader = new StreamReader("..\\..\\..\\Level1.txt");
-            //Console.WriteLine(reader.ReadToEnd());
-            while (true)
-            {
-                int res = reader.Read();
-                if (res == -1) break;
-                else if((char)res =='#')
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.Write((char)res);
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write((char)res);
-                }
-            }
+        //static void Map_BinaryRead()
+        //{
+        //    StreamReader reader = new StreamReader("..\\..\\..\\Level1.txt");
+        //    //Console.WriteLine(reader.ReadToEnd());
+        //    while (true)
+        //    {
+        //        int res = reader.Read();
+        //        if (res == -1) break;
+        //        else if((char)res =='#')
+        //        {
+        //            Console.ForegroundColor = ConsoleColor.DarkBlue;
+        //            Console.Write((char)res);
+        //        }
+        //        else
+        //        {
+        //            Console.ForegroundColor = ConsoleColor.Yellow;
+        //            Console.Write((char)res);
+        //        }
+        //    }
 
-            reader.Close();
-        }
+        //    reader.Close();
+        //}
         static void Main(string[] args)
         {
+
             
 
-            //Map_BinaryRead();
 
-            //Console.ReadKey();
+            // Map_BinaryRead();
+
+            Console.ReadKey();
             points = new List<Point>();
             points.Add(new Point(4, 5));
             points.Add(new Point(4, 7));
@@ -169,10 +213,10 @@ namespace _04_ConsoleGame_SimpleMap
                         p_pos.y++;
                         break;
                     case 'a':
-                        p_pos.x--;
+                        p_pos.x-=2;
                         break;
                     case 'd':
-                        p_pos.x++;
+                        p_pos.x+=2;
                         break;
                     default:
                         break;
@@ -194,7 +238,11 @@ namespace _04_ConsoleGame_SimpleMap
                     }
                 }
 
-                Refresh();
+
+                ReadBuffer();
+                DrawPlayerNew();
+                DrawBuffer();
+                //Refresh();
             }
         }
     }
