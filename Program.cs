@@ -14,9 +14,9 @@ namespace _04_ConsoleGame_SimpleMap
     //4.敌人AI制作
     public class Player
     {
-        public int x;
-        public int y;
-        public int score=0;
+        public int x = 4;
+        public int y = 3;
+        public int score = 0;
     }
 
     struct Point
@@ -30,10 +30,6 @@ namespace _04_ConsoleGame_SimpleMap
         }
     }
 
-    class Map
-    {
-        
-    }
 
     class Program
     {
@@ -44,21 +40,22 @@ namespace _04_ConsoleGame_SimpleMap
         static List<Point> points = new List<Point>();
         static Player p = new Player();
 
-        static char[,] buffer = new char[height+offset_y+5, width+offset_x+5];
+        static char[,] buffer = new char[height + offset_y + 5, width + offset_x + 5];
         //static char[,] MapArray = new char[50, 50];
         static char[,] MapArray = new char[10, 43];
+        static char[,] BeansArray = new char[10, 43];//用于存豆子位置的，大小和地图一样
 
         static void ReadBuffer()
         {
             StreamReader reader = new StreamReader("..\\..\\..\\Level1.txt");
             int count = 0;
-            while (count<10)//count代表行数，最多10行
+            while (count < 10)//count代表行数，最多10行
             {
                 string s = reader.ReadLine();
 
                 char[] line1 = s.ToCharArray();
 
-                for(int i = 0; i < MapArray.GetLength(1); i++)
+                for (int i = 0; i < MapArray.GetLength(1); i++)
                 {
                     MapArray[count, i] = line1[i];
                 }
@@ -81,8 +78,10 @@ namespace _04_ConsoleGame_SimpleMap
                     }
                     else if (MapArray[i, j] == 'o')
                     {
+                        //points.Add(new Point(i, j));
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.Write('●');
+
                     }
                     else if (MapArray[i, j] == '@')
                     {
@@ -101,42 +100,41 @@ namespace _04_ConsoleGame_SimpleMap
 
         static void ClearBuffer()
         {
-            for(int i = 0; i < buffer.GetLength(0); i++)
+            for (int i = 0; i < buffer.GetLength(0); i++)
             {
-                for(int j = 0; j < buffer.GetLength(1); j++)
+                for (int j = 0; j < buffer.GetLength(1); j++)
                 {
                     buffer[i, j] = ' ';
                 }
             }
-            //Thread.Sleep(100);
         }
-        
-        static void DrawBorder()
-        {
-            //up
-            for(int i = 0; i < width; i++)
-            {
-                buffer[offset_y-1, i + offset_x] = '#';
-            }
-            //down
-            for(int i = 0; i < width; i++)
-            {
-                buffer[offset_y + height, i + offset_x] = '#';
-            }
-            //left
-            for(int i = 0; i < height; i++)
-            {
-                buffer[i + offset_y, offset_x-1] = '#';
-            }
-            //right
-            for(int i = 0; i < height; i++)
-            {
-                buffer[i + offset_y, offset_x + width] = '#';
-            }
-        }
+
+        //static void DrawBorder()
+        //{
+        //    //up
+        //    for(int i = 0; i < width; i++)
+        //    {
+        //        buffer[offset_y-1, i + offset_x] = '#';
+        //    }
+        //    //down
+        //    for(int i = 0; i < width; i++)
+        //    {
+        //        buffer[offset_y + height, i + offset_x] = '#';
+        //    }
+        //    //left
+        //    for(int i = 0; i < height; i++)
+        //    {
+        //        buffer[i + offset_y, offset_x-1] = '#';
+        //    }
+        //    //right
+        //    for(int i = 0; i < height; i++)
+        //    {
+        //        buffer[i + offset_y, offset_x + width] = '#';
+        //    }
+        //}
         static void DrawPlayerNew()
         {
-            MapArray[p.y,p.x] = '@';
+            MapArray[p.y, p.x] = '@';
         }
         static void DrawPlayer()
         {
@@ -145,42 +143,42 @@ namespace _04_ConsoleGame_SimpleMap
         static int[] Direction = new int[] { 0, 1, 2, 3 };//0 < 1 > 2 V 3 A
         static void DrawPoints()
         {
-            for(int i = 0; i < points.Count; i++)
+            for (int i = 0; i < points.Count; i++)
             {
                 buffer[points[i].y + offset_y, points[i].x + offset_x] = 'o';
             }
         }
         //static ConsoleColor color = Console.ForegroundColor;
-        static void Refresh()
-        {
-            ClearBuffer();
-            DrawBorder();
-            DrawPlayer();
-            DrawPoints();
+        //static void Refresh()
+        //{
+        //    ClearBuffer();
+        //    DrawBorder();
+        //    DrawPlayer();
+        //    DrawPoints();
 
-            Console.Clear();
+        //    Console.Clear();
 
-            //ConsoleColor color = Console.ForegroundColor;
-            StringBuilder sb = new StringBuilder();
+        //    //ConsoleColor color = Console.ForegroundColor;
+        //    StringBuilder sb = new StringBuilder();
 
-            for(int i = 0; i < buffer.GetLength(0); i++)
-            {
-                for(int j = 0; j < buffer.GetLength(1); j++)
-                {
-                    //if(buffer[i,j] == '@')
-                   // {
-                    //    Console.ForegroundColor = ConsoleColor.Yellow;
-                  //  }
-                   sb.Append(buffer[i, j] + " ");
-                  
-                }
-                sb.Append("\n");
-            }
-            
-            Console.WriteLine(sb.ToString());
-            //Console.ForegroundColor = color;
-            Console.WriteLine("score:{0}", p.score);
-        }
+        //    for(int i = 0; i < buffer.GetLength(0); i++)
+        //    {
+        //        for(int j = 0; j < buffer.GetLength(1); j++)
+        //        {
+        //            //if(buffer[i,j] == '@')
+        //           // {
+        //            //    Console.ForegroundColor = ConsoleColor.Yellow;
+        //          //  }
+        //           sb.Append(buffer[i, j] + " ");
+
+        //        }
+        //        sb.Append("\n");
+        //    }
+
+        //    Console.WriteLine(sb.ToString());
+        //    //Console.ForegroundColor = color;
+        //    Console.WriteLine("score:{0}", p.score);
+        //}
         //static void Map_BinaryRead()
         //{
         //    StreamReader reader = new StreamReader("..\\..\\..\\Level1.txt");
@@ -203,13 +201,23 @@ namespace _04_ConsoleGame_SimpleMap
 
         //    reader.Close();
         //}
+
+        static void SaveBeans()//把txt文件中的信息读取到MapArray中，并且取出豆子的位置信息存入BeansArray
+        {
+            ReadBuffer();
+            for (int i = 0; i < MapArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < MapArray.GetLength(1); j++)
+                {
+                    if (MapArray[i, j] == 'o')
+                    {
+                        points.Add(new Point(i, j));
+                    }
+                }
+            }
+        }
         static void Main(string[] args)
         {
-
-            
-
-
-            // Map_BinaryRead();
 
             Console.ReadKey();
             points = new List<Point>();
@@ -232,10 +240,10 @@ namespace _04_ConsoleGame_SimpleMap
                         p_pos.y++;
                         break;
                     case 'a':
-                        p_pos.x-=2;
+                        p_pos.x -= 2;
                         break;
                     case 'd':
-                        p_pos.x+=2;
+                        p_pos.x += 2;
                         break;
                     default:
                         break;
@@ -247,11 +255,11 @@ namespace _04_ConsoleGame_SimpleMap
                     p.y = p_pos.y;
                 }
                 //吃豆
-                for(int i = 0; i < points.Count; i++)
+                for (int i = 0; i < points.Count; i++)
                 {
-                    if (points[i].x == p.x && points[i].y == p.y)
+                    if (points[i].y == p.x && points[i].x == p.y)
                     {
-                        points.RemoveAt(i);
+                        //points.RemoveAt(i);
                         p.score++;
                         break;
                     }
@@ -261,6 +269,7 @@ namespace _04_ConsoleGame_SimpleMap
                 ReadBuffer();
                 DrawPlayerNew();
                 DrawBuffer();
+                Console.WriteLine("score:{0}", p.score);
                 //Refresh();
             }
         }
