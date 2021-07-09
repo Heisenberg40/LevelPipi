@@ -74,7 +74,26 @@ namespace _04_ConsoleGame_SimpleMap
             {
                 for (int j = 0; j < MapArray.GetLength(1); j++)
                 {
-                    Console.Write(MapArray[i, j]);
+                    if (MapArray[i, j] == '#')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write('■');
+                    }
+                    else if (MapArray[i, j] == 'o')
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write('●');
+                    }
+                    else if (MapArray[i, j] == '@')
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write('★');
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.Write(MapArray[i, j]);
+                    }
                 }
                 Console.WriteLine();
             }
