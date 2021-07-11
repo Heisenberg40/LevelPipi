@@ -11,10 +11,10 @@ using System.Security.Cryptography.X509Certificates;
 namespace _04_ConsoleGame_SimpleMap
 {
     //剩余问题：
-    //1.棋子在移动到边界时会遇到index out of range异常
-    //2.调整地图边界
-    //3.棋子颜色
-    //4.敌人AI制作
+    //1.棋子在移动到边界时会遇到index out of range异常，敌人寻路法则优化
+    //2.添加道具，吃了后可以反杀敌人，获得100分。吃了后，敌我棋子颜色都要变化。同时敌人的寻路规则也要修改，改为躲避玩家
+    //3.添加关卡2新地图，会有2个敌人……依次类推
+    //4.剩余命数和计分板的界面优化（低优先级）
     enum Direction
     {
         None,
