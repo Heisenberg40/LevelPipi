@@ -8,62 +8,92 @@ namespace _04_ConsoleGame_SimpleMap
     class Snake
     {
         public LinkedList<Point> link;
-        public int x =7 ;
-        public int y =16 ;
+        public int x =5;
+        public int y =32;
+        
         //头 linke.First 尾 link.last
         //public Direction direction;
         public int Len { get; private set; }
 
         public Snake(int x, int y, int len)
         {
+
             link = new LinkedList<Point>();
             Len = len;
             for(int i = 0; i < len; i++)
             {
                 link.AddFirst(new Point(x, y));
             }
+
             //direction = Direction.Down;
         }
-        //public void SetDirection(Direction dir)
-        //{
-        //    if(dir == Direction.None)
-        //    {
-        //        return;
-        //    }
-        //    switch (direction)
-        //    {
-        //        case Direction.Up:
-        //            if(dir == Direction.Down)
-        //            {
-        //                return;
-        //            }
-        //            break;
-        //        case Direction.Down:
-        //            if(dir == Direction.Up)
-        //            {
-        //                return;
-        //            }
-        //            break;
-        //        case Direction.Left:
-        //            if(dir == Direction.Right)
-        //            {
-        //                return;
-        //            }
-        //            break;
-        //        case Direction.Right:
-        //            if(dir == Direction.Left)
-        //            {
-        //                return;
-        //            }
-        //            break;
-        //    }
-        //    direction = dir;
-        //}
 
-        public void ThreadMethod ()
+        public void ThreadMove()
         {
             while (true)
             {
+                x--;
+                Thread.Sleep(500);
+            }
+           
+        }
+        public void SetDirection(Direction dir, Player player)
+        {
+            
+            //p_pos.x >= 3 && p_pos.x < width && p_pos.y >= 2 && p_pos.y < height &&
+            //if (barrier.Contains(p_pos))
+            //{
+            //    return;
+            //}
+
+            //else
+            //{
+                switch (dir)
+                {
+                    case Direction.Up:
+                    if (player.x > x)
+                    {
+                        x++;
+                    }
+                    else if (player.x < x)
+                    {
+                        x--;
+                    }
+                    else if (player.x == x)
+                    {
+                        if (player.y > y)
+                        {
+                            y++;
+                        }
+                        else
+                        {
+                            y--;
+                        }
+                    }
+                        break;
+                    case Direction.Down:
+                        //p_pos.
+                        x--;
+                        break;
+                    case Direction.Left:
+                        //p_pos.
+                        y += 2;
+                        break;
+                    case Direction.Right:
+                        //p_pos.
+                        y -= 2;
+                        break;
+                }
+                // }
+                //x = p_pos.x;
+                //y = p_pos.y;
+            //}
+        }
+
+        public void ThreadMethod ()
+        {
+            //while (true)
+            //{
                 Direction direction = new Direction();
                 ConsoleKeyInfo key = new ConsoleKeyInfo();
                 key = Console.ReadKey(true);
@@ -87,8 +117,8 @@ namespace _04_ConsoleGame_SimpleMap
                         direction = Direction.None;
                         break;
                 }
-                while (Console.KeyAvailable)
-                {
+                //while (Console.KeyAvailable)
+                //{
                     if (direction == Direction.Up && x > 2)
                     {
                         x--;
@@ -113,8 +143,8 @@ namespace _04_ConsoleGame_SimpleMap
                     {
 
                     }
-                }
-            }
+               // }
+            //}
             
                 
             
