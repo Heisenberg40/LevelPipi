@@ -8,22 +8,24 @@ namespace _04_ConsoleGame_SimpleMap
     class Snake
     {
         public LinkedList<Point> link;
-        public int x =5;
-        public int y =32;
+        public int x ;
+        public int y ;
         
         //头 linke.First 尾 link.last
         //public Direction direction;
         public int Len { get; private set; }
 
-        public Snake(int x, int y, int len)
+        public Snake(int x, int y)
         {
 
-            link = new LinkedList<Point>();
-            Len = len;
-            for(int i = 0; i < len; i++)
-            {
-                link.AddFirst(new Point(x, y));
-            }
+            this.x = x;
+            this.y = y;
+            //link = new LinkedList<Point>();
+            //Len = len;
+            //for(int i = 0; i < len; i++)
+            //{
+            //    link.AddFirst(new Point(x, y));
+            //}
 
             //direction = Direction.Down;
         }

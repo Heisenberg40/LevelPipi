@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-ConsoleGame-SimpleMap", "04-ConsoleGame-SimpleMap.csproj", "{DC032AB5-1A81-40EF-BA66-78C6B43EA11D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm - BreadthFirstSearch", "..\..\LevelPipi\Algorithm - BreadthFirstSearch\Algorithm - BreadthFirstSearch.csproj", "{4AD674BC-6E49-404B-9877-96AEF18455BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC032AB5-1A81-40EF-BA66-78C6B43EA11D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC032AB5-1A81-40EF-BA66-78C6B43EA11D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC032AB5-1A81-40EF-BA66-78C6B43EA11D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC032AB5-1A81-40EF-BA66-78C6B43EA11D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AD674BC-6E49-404B-9877-96AEF18455BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AD674BC-6E49-404B-9877-96AEF18455BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AD674BC-6E49-404B-9877-96AEF18455BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AD674BC-6E49-404B-9877-96AEF18455BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A41057F1-22FA-40A3-9C8D-5D849BD3F19A}
+	EndGlobalSection
+EndGlobal
